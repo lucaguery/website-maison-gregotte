@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MoodboardCard from '../../components/MoodboardCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n/translations';
+
+const lang = 'en';
+
+const moodboards = (await getCollection('moodboards'))
+  .filter((entry) => entry.data.lang === lang)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title={`${t(lang, 'nav.moodboards')} — maison gregotte`}>
+  <section class="px-6 py-section max-w-7xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">{t(lang, 'nav.moodboards')}</h1>
+    <p class="text-earth mb-12 max-w-2xl">
+      Visual inspirations, colour palettes and moods that feed our collections.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card">
+      {moodboards.map((entry) => (
+        <MoodboardCard
+          title={entry.data.title}
+          description={entry.data.description}
+          cover={entry.data.cover}
+          slug={entry.id}
+          lang={lang}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

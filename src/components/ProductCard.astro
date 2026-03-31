@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { t } from '../i18n/translations';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  title: string;
+  description: string;
+  price: number;
+  currency: string;
+  cover: ImageMetadata;
+  sold: boolean;
+  slug: string;
+  lang: Lang;
+}
+
+const { title, description, price, currency, cover, sold, slug, lang } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+  style: 'currency',
+  currency,
+}).format(price);
+---
+
+<article class="group">
+  <a href={`/boutique/${slug}`} class="block">
+    <div class="aspect-4/5 overflow-hidden rounded-sm bg-linen">
+      <Image
+        src={cover}
+        alt={title}
+        width={400}
+        height={500}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
+    <div class="mt-4 space-y-1">
+      <h3 class="font-serif text-lg text-ink">{title}</h3>
+      <p class="text-sm text-earth/70 line-clamp-2">{description}</p>
+      <p class="text-sm font-medium text-ink">
+        {sold ? (
+          <span class="text-terracotta">{t(lang, 'shop.sold')}</span>
+        ) : (
+          formattedPrice
+        )}
+      </p>
+    </div>
+  </a>
+</article>

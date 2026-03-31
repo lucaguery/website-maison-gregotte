@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import { getLocalizedPath } from '../i18n/translations';
+import type { Lang } from '../i18n/translations';
+
+interface MoodboardEntry {
+  title: string;
+  description: string;
+  cover: ImageMetadata;
+  slug: string;
+}
+
+interface Props {
+  lang: Lang;
+  title: string;
+  moodboards: MoodboardEntry[];
+}
+
+const { lang, title, moodboards } = Astro.props;
+---
+
+<section class="min-h-dvh flex flex-col justify-center bg-linen py-12">
+  <h2 class="text-sm uppercase tracking-[0.25em] text-earth px-6 mb-8 max-w-7xl mx-auto w-full">
+    {title}
+  </h2>
+
+  <div class="carousel-track cursor-grab" data-carousel>
+    <!-- Leading spacer for first-card centering -->
+    <div class="w-4 shrink-0" aria-hidden="true"></div>
+
+    {moodboards.map((mb) => (
+      <a
+        href={getLocalizedPath(`/moodboards/${mb.slug}`, lang)}
+        class="w-[80vw] md:w-[60vw] lg:w-[45vw] shrink-0 relative overflow-hidden rounded-sm group"
+      >
+        <div class="aspect-3/2 overflow-hidden">
+          <Image
+            src={mb.cover}
+            alt={mb.title}
+            width={900}
+            height={600}
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+        <!-- Overlay with title -->
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent flex items-end p-6">
+          <div>
+            <h3 class="text-lg text-cream font-light tracking-wider">{mb.title}</h3>
+            <p class="text-xs text-cream/60 mt-1">{mb.description}</p>
+          </div>
+        </div>
+      </a>
+    ))}
+
+    <!-- Trailing spacer -->
+    <div class="w-4 shrink-0" aria-hidden="true"></div>
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-carousel]');
+
+  if (track && window.matchMedia('(pointer: fine)').matches) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.classList.add('is-dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      track.scrollLeft = scrollLeft - walk;
+    });
+  }
+</script>

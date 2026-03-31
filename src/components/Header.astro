@@ -1,0 +1,45 @@
+---
+import { t, getLocalizedPath, languages } from '../i18n/translations';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const navItems = [
+  { key: 'nav.moodboards' as const, path: '/moodboards' },
+  { key: 'nav.shop' as const, path: '/boutique' },
+  { key: 'nav.about' as const, path: '/a-propos' },
+  { key: 'nav.contact' as const, path: '/contact' },
+];
+
+const otherLang = lang === 'fr' ? 'en' : 'fr';
+---
+
+<header class="border-b border-sand/30">
+  <nav class="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
+    <a href={getLocalizedPath('/', lang)} class="font-serif text-2xl tracking-wide text-ink">
+      maison gregotte
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a
+          href={getLocalizedPath(item.path, lang)}
+          class="text-sm uppercase tracking-widest text-earth hover:text-ink transition-colors"
+        >
+          {t(lang, item.key)}
+        </a>
+      ))}
+    </div>
+
+    <a
+      href={getLocalizedPath(Astro.url.pathname, otherLang)}
+      class="text-xs uppercase tracking-widest text-earth hover:text-ink transition-colors border border-sand/50 px-3 py-1.5 rounded-full"
+    >
+      {languages[otherLang]}
+    </a>
+  </nav>
+</header>

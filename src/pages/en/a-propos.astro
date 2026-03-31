@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { t } from '../../i18n/translations';
+import portraitImg from '../../assets/images/moodboard-atelier.jpg';
+
+const lang = 'en';
+---
+
+<BaseLayout title={`${t(lang, 'nav.about')} — maison gregotte`}>
+  <section class="px-6 py-section max-w-5xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">{t(lang, 'about.title')}</h1>
+    <p class="text-earth mb-12">{t(lang, 'about.subtitle')}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+      <!-- Portrait -->
+      <div class="aspect-4/5 overflow-hidden rounded-sm bg-linen">
+        <Image
+          src={portraitImg}
+          alt="The maison gregotte studio"
+          width={600}
+          height={750}
+          class="h-full w-full object-cover"
+        />
+      </div>
+
+      <!-- Bio -->
+      <div class="space-y-6 text-ink/85 leading-relaxed">
+        <p>
+          maison gregotte was born from a simple passion: beautiful things that
+          tell a story. Based in the south of France, I hunt for treasures, paint,
+          and compose visual worlds where the old and the contemporary intertwine.
+        </p>
+        <p>
+          Every piece offered — whether a canvas, a found vase, or a forgotten
+          object — is chosen or created with the same care: the right gesture,
+          materials that age gracefully, colours that bring calm.
+        </p>
+        <p>
+          The moodboards I share here are open sketchbooks of inspiration. They
+          feed my work and, I hope, yours too. Feel free to reach out if a piece
+          catches your eye or if you're looking for something specific.
+        </p>
+
+        <div class="pt-4 border-t border-sand/30">
+          <h3 class="font-serif text-lg text-ink mb-3">In a few words</h3>
+          <ul class="space-y-2 text-sm text-earth">
+            <li>Self-taught painter & passionate vintage hunter</li>
+            <li>Based in the south of France</li>
+            <li>Oil on canvas, acrylic, mixed media</li>
+            <li>Vintage objects from the 1950s to 1980s</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

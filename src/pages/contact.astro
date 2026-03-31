@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n/translations';
+
+const lang = 'fr';
+---
+
+<BaseLayout title={`${t(lang, 'nav.contact')} — maison gregotte`}>
+  <section class="px-6 py-section max-w-3xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">{t(lang, 'contact.title')}</h1>
+    <p class="text-earth mb-12">{t(lang, 'contact.subtitle')}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Contact form -->
+      <form class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm text-earth mb-2">{t(lang, 'contact.name')}</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full border border-sand/50 bg-transparent px-4 py-3 text-sm text-ink placeholder:text-earth/40 focus:border-earth focus:outline-none rounded-sm"
+            placeholder="Votre nom"
+          />
+        </div>
+        <div>
+          <label for="email" class="block text-sm text-earth mb-2">{t(lang, 'contact.email')}</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border border-sand/50 bg-transparent px-4 py-3 text-sm text-ink placeholder:text-earth/40 focus:border-earth focus:outline-none rounded-sm"
+            placeholder="votre@email.com"
+          />
+        </div>
+        <div>
+          <label for="message" class="block text-sm text-earth mb-2">{t(lang, 'contact.message')}</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            class="w-full border border-sand/50 bg-transparent px-4 py-3 text-sm text-ink placeholder:text-earth/40 focus:border-earth focus:outline-none rounded-sm resize-none"
+            placeholder="Votre message..."
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="bg-ink text-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-charcoal transition-colors rounded-sm"
+        >
+          {t(lang, 'contact.send')}
+        </button>
+      </form>
+
+      <!-- Contact info -->
+      <div class="space-y-8">
+        <div>
+          <h3 class="font-serif text-lg text-ink mb-3">Coordonnées</h3>
+          <ul class="space-y-3 text-sm text-earth">
+            <li>hello@maisongregotte.fr</li>
+            <li>+33 6 12 34 56 78</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-serif text-lg text-ink mb-3">Atelier</h3>
+          <p class="text-sm text-earth leading-relaxed">
+            12 rue des Oliviers<br />
+            13100 Aix-en-Provence<br />
+            France
+          </p>
+          <p class="text-sm text-earth/60 mt-2">
+            Visites sur rendez-vous uniquement
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-serif text-lg text-ink mb-3">Suivez-nous</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#" class="text-earth hover:text-ink transition-colors">Instagram</a>
+            </li>
+            <li>
+              <a href="#" class="text-earth hover:text-ink transition-colors">Pinterest</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

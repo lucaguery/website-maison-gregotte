@@ -1,0 +1,68 @@
+---
+import ProductCard from './ProductCard.astro';
+import type { Lang } from '../i18n/translations';
+
+interface ProductEntry {
+  title: string;
+  description: string;
+  price: number;
+  currency: string;
+  cover: ImageMetadata;
+  sold: boolean;
+  slug: string;
+}
+
+interface Props {
+  lang: Lang;
+  title: string;
+  products: ProductEntry[];
+}
+
+const { lang, title, products } = Astro.props;
+---
+
+<section class="min-h-dvh flex flex-col py-16 px-6">
+  <h2 class="text-sm uppercase tracking-[0.25em] text-earth mb-10 max-w-7xl mx-auto w-full">
+    {title}
+  </h2>
+
+  <div class="masonry-grid max-w-7xl mx-auto w-full">
+    {products.map((product, i) => (
+      <article class="reveal-item" style={`animation-delay: ${i * 120}ms`}>
+        <ProductCard
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          currency={product.currency}
+          cover={product.cover}
+          sold={product.sold}
+          slug={product.slug}
+          lang={lang}
+        />
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll('.reveal-item');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+  } else {
+    // Fallback: show all immediately
+    items.forEach((item) => item.classList.add('revealed'));
+  }
+</script>

@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-maison gregotte — a bilingual (FR/EN) artistic website showcasing mood boards, paintings, and vintage objects for sale. Built with Astro 6, Tailwind CSS v4, and TypeScript.
+laura gregori — a bilingual (FR/EN) artistic website showcasing mood boards, paintings, and vintage objects for sale. Built with Astro 6, Tailwind CSS v4, and TypeScript.
 
-**Branding rule**: The name "maison gregotte" is always lowercase, everywhere (UI, meta tags, content).
+**Branding rule**: The artist's name is displayed as **"laura gregori"** — always lowercase, everywhere (UI, meta tags, body copy, alt text). Treat it as a design/brand mark, not a proper name capitalisation. The legacy "maison gregotte" brand has been retired; do not reintroduce it.
 
 ## Commands
 

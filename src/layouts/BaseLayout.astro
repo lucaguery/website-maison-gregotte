@@ -31,13 +31,15 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
     <noscript><style>.reveal-item { opacity: 1 !important; }</style></noscript>
   </head>
   <body class:list={['min-h-screen flex flex-col', bodyClass]}>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <div class:list={[headerOverlay && 'header-overlay']}>
       <Header lang={lang} />
     </div>
@@ -45,5 +47,23 @@ const {
       <slot />
     </main>
     <Footer lang={lang} />
+
+    <script>
+      const bar = document.querySelector<HTMLElement>('.scroll-progress');
+      if (bar) {
+        let raf = 0;
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          bar.style.setProperty('--scroll', pct.toFixed(2) + '%');
+          raf = 0;
+        };
+        window.addEventListener('scroll', () => {
+          if (!raf) raf = requestAnimationFrame(update);
+        }, { passive: true });
+        update();
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/translations';
+import { getLocalizedPath, t } from '../i18n/translations';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  tagline: string;
+  heroImage: ImageMetadata;
+}
+
+const { lang, title, tagline, heroImage } = Astro.props;
+const ctaLabel = t(lang, 'hero.cta');
+const stampLabel = t(lang, 'hero.stamp');
+const isWordmarkTitle = title === 'laura gregori';
+---
+
+<section class="hero-split relative bg-cream">
+  <div class="max-w-7xl mx-auto px-6 pt-24 pb-14 md:pt-28 md:pb-20 grid md:grid-cols-[1fr_1fr] gap-10 md:gap-14 items-center min-h-[68vh]">
+
+    <!-- LEFT: Text -->
+    <div class="hero-copy order-2 md:order-1 relative">
+      <span class="hero-stamp hidden md:block absolute -top-8 -left-1 text-[10px] uppercase tracking-[0.35em] text-terracotta/80">
+        {stampLabel}
+      </span>
+
+      <h1
+        class:list={[
+          'hero-title text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-ink lowercase',
+          isWordmarkTitle && 'hero-title--wordmark',
+        ]}
+      >
+        {isWordmarkTitle ? <Wordmark dot animated /> : title}
+      </h1>
+
+      <p class="hero-tagline mt-6 text-base md:text-lg text-earth leading-relaxed max-w-md">
+        {tagline}
+      </p>
+
+      <a
+        href={getLocalizedPath('/l-art', lang)}
+        class="hero-cta group mt-9 inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-ink border-b border-ink/30 pb-1 hover:border-ink transition-colors duration-500"
+      >
+        {ctaLabel}
+        <span class="hero-cta-arrow inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+
+    <!-- RIGHT: Image — framed like a physical artwork on a wall -->
+    <div class="hero-image-wrap order-1 md:order-2">
+      <div class="hero-artframe" data-hero-artframe>
+        <div class="hero-artframe-inner aspect-[4/5]">
+          <Image
+            src={heroImage}
+            alt=""
+            width={800}
+            height={1000}
+            class="hero-image h-full w-full object-cover"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Cursor-reactive subtle tilt — makes the canvas feel alive.
+  const frame = document.querySelector<HTMLElement>('[data-hero-artframe]');
+  if (frame && window.matchMedia('(prefers-reduced-motion: no-preference)').matches && window.matchMedia('(pointer: fine)').matches) {
+    const BASE_Y = -6;
+    const BASE_Z = -1.2;
+    const RANGE_Y = 3;
+    const RANGE_Z = 0.8;
+    let raf = 0;
+    let tx = 0, ty = 0;
+
+    const update = () => {
+      frame.style.transform = `rotateY(${BASE_Y + tx}deg) rotateZ(${BASE_Z + ty}deg) translateZ(0)`;
+      raf = 0;
+    };
+
+    window.addEventListener('pointermove', (e) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      tx = ((e.clientX / w) - 0.5) * 2 * RANGE_Y;
+      ty = ((e.clientY / h) - 0.5) * 2 * RANGE_Z;
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+  }
+</script>

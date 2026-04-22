@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/translations';
+import { t } from '../i18n/translations';
+
+type ArtKind = 'painting' | 'vintage' | 'moodboard';
+
+interface Item {
+  title: string;
+  description: string;
+  cover: ImageMetadata;
+  slug: string;
+  kind: ArtKind;
+  price?: number;
+  currency?: string;
+  sold?: boolean;
+}
+
+interface Props {
+  lang: Lang;
+  items: Item[];
+}
+
+const { lang, items } = Astro.props;
+
+const filters = [
+  { key: 'all', label: t(lang, 'art.filter.all') },
+  { key: 'painting', label: t(lang, 'art.filter.paintings') },
+  { key: 'moodboard', label: t(lang, 'art.filter.moodboards') },
+  { key: 'vintage', label: t(lang, 'art.filter.vintage') },
+];
+
+const formatPrice = (price: number, currency: string) =>
+  new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 0,
+  }).format(price);
+
+const kindLabel = (kind: ArtKind) => t(lang, `art.kind.${kind}` as const);
+---
+
+<section class="px-6 py-section max-w-7xl mx-auto">
+  <header class="mb-10 md:mb-12">
+    <h1 class="text-4xl md:text-6xl font-medium tracking-tight text-ink lowercase">
+      <span class="accent-tick"></span>{t(lang, 'art.title')}
+    </h1>
+    <p class="mt-4 ml-8 text-base md:text-lg text-earth/85 max-w-xl leading-relaxed">
+      {t(lang, 'art.subtitle')}
+    </p>
+  </header>
+
+  <!-- Filter chips -->
+  <div class="flex flex-wrap items-center gap-2 mb-10 md:mb-12" role="tablist">
+    {filters.map((f) => (
+      <button
+        type="button"
+        role="tab"
+        data-filter={f.key}
+        aria-selected={f.key === 'all'}
+        class="art-filter-chip text-xs uppercase tracking-[0.25em] px-3 py-2 border border-earth/25 text-earth rounded-full transition-colors duration-300 hover:border-terracotta hover:text-terracotta"
+      >
+        {f.label}
+      </button>
+    ))}
+    <span class="text-xs tracking-[0.25em] text-earth/50 ml-auto tabular-nums">
+      <span id="art-count">{items.length}</span> / {items.length}
+    </span>
+  </div>
+
+  <!-- Mixed gallery — asymmetric repeating rhythm -->
+  <div class="art-gallery grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10 md:gap-y-12">
+    {items.map((it, i) => {
+      const pattern = i % 6;
+      const layoutClasses = [
+        'md:col-span-7',
+        'md:col-span-5 md:mt-10',
+        'md:col-span-5 md:mt-4',
+        'md:col-span-7 md:-mt-6',
+        'md:col-span-4',
+        'md:col-span-8 md:mt-8',
+      ][pattern];
+      const ratios = [
+        'aspect-[5/4]',
+        'aspect-[2/3]',
+        'aspect-[1/1]',
+        'aspect-[16/10]',
+        'aspect-[3/4]',
+        'aspect-[4/3]',
+      ][pattern];
+
+      return (
+        <article
+          id={it.slug}
+          class={`art-item group ${layoutClasses}`}
+          data-kind={it.kind}
+        >
+          <div class={`${ratios} overflow-hidden bg-linen relative`}>
+            <Image
+              src={it.cover}
+              alt={it.title}
+              width={800}
+              height={800}
+              class="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+            />
+            {it.sold && (
+              <span class="absolute top-3 left-3 text-[10px] uppercase tracking-[0.25em] bg-cream/90 text-terracotta px-2 py-1">
+                {t(lang, 'shop.sold')}
+              </span>
+            )}
+            <span class="absolute bottom-3 right-3 text-[10px] uppercase tracking-[0.25em] bg-ink/80 text-cream px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              {kindLabel(it.kind)}
+            </span>
+          </div>
+          <div class="mt-4 flex items-baseline gap-3 flex-wrap">
+            <span class="text-xs text-earth/55 tabular-nums">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="text-base md:text-lg text-ink lowercase tracking-tight">
+              {it.title}
+            </h3>
+            {typeof it.price === 'number' && it.currency && (
+              <p class="text-sm text-ink tabular-nums ml-auto">
+                {it.sold ? '—' : formatPrice(it.price, it.currency)}
+              </p>
+            )}
+          </div>
+          <p class="mt-1 ml-8 text-sm text-earth/75 max-w-md leading-relaxed">
+            {it.description}
+          </p>
+        </article>
+      );
+    })}
+  </div>
+
+  <p class="art-empty hidden mt-20 text-center text-sm text-earth/60 uppercase tracking-[0.3em]">
+    —
+  </p>
+</section>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.art-filter-chip');
+  const items = document.querySelectorAll<HTMLElement>('.art-item');
+  const countEl = document.getElementById('art-count');
+  const emptyEl = document.querySelector<HTMLElement>('.art-empty');
+
+  const applyFilter = (key: string) => {
+    let visible = 0;
+    items.forEach((el) => {
+      const match = key === 'all' || el.dataset.kind === key;
+      el.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (countEl) countEl.textContent = String(visible);
+    if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
+  };
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const key = chip.dataset.filter || 'all';
+      chips.forEach((c) => {
+        const active = c === chip;
+        c.setAttribute('aria-selected', String(active));
+        c.classList.toggle('bg-ink', active);
+        c.classList.toggle('text-cream', active);
+        c.classList.toggle('border-ink', active);
+        c.classList.toggle('text-earth', !active);
+      });
+      applyFilter(key);
+    });
+  });
+
+  // Activate initial state
+  const initial = document.querySelector<HTMLButtonElement>('.art-filter-chip[aria-selected="true"]');
+  if (initial) {
+    initial.classList.add('bg-ink', 'text-cream', 'border-ink');
+    initial.classList.remove('text-earth');
+  }
+
+  // If URL has hash, scroll smoothly to matching item on load
+  if (window.location.hash) {
+    requestAnimationFrame(() => {
+      const target = document.querySelector(window.location.hash);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+</script>

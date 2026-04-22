@@ -1,0 +1,43 @@
+---
+interface Props {
+  dot?: boolean;
+  animated?: boolean;
+  class?: string;
+}
+
+const { dot = false, animated = false, class: className } = Astro.props;
+
+// When animated, split each word into per-letter spans carrying a CSS
+// custom property for the stagger delay. Keeps animation data-driven
+// and fully declarative — zero JS, zero FOUC.
+const monoLetters = 'laura'.split('');
+const serifLetters = 'gregori'.split('');
+// Delays calibrated to a "human typing" rhythm — ~85ms between
+// keys (roughly 45 WPM, measured but not sluggish). Each letter
+// snaps in binary at its delay. A longer pause at the word-gap
+// (~140ms extra) reads as the typist's thumb brushing space,
+// letting the eye register "laura" before "gregori" begins.
+// Last letter "i" lands at ~1.01s, period strike follows at ~1.12s.
+const monoBase = 0.08;    // small initial pause before typing starts
+const monoStep = 0.085;   // ~85ms between keys — steady human cadence
+const serifBase = 0.55;   // word-gap pause (~85 + 140ms after last "laura")
+const serifStep = 0.085;  // same cadence across "gregori"
+---
+
+<span class:list={['wordmark', animated && 'wordmark-animated', className]} aria-label="laura gregori">
+  <span class="wordmark-mono" aria-hidden="true">
+    {animated
+      ? monoLetters.map((ch, i) => (
+          <span class="wordmark-letter" style={`--delay:${(monoBase + i * monoStep).toFixed(3)}s`}>{ch}</span>
+        ))
+      : 'laura'}
+  </span>
+  <span class="wordmark-serif" aria-hidden="true">
+    {animated
+      ? serifLetters.map((ch, i) => (
+          <span class="wordmark-letter" style={`--delay:${(serifBase + i * serifStep).toFixed(3)}s`}>{ch}</span>
+        ))
+      : 'gregori'}
+  </span>
+  {dot && <span class="wordmark-dot" aria-hidden="true">.</span>}
+</span>

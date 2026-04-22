@@ -1,6 +1,7 @@
 ---
 import { t, getLocalizedPath, languages } from '../i18n/translations';
 import type { Lang } from '../i18n/translations';
+import Wordmark from './Wordmark.astro';
 
 interface Props {
   lang: Lang;
@@ -9,8 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 
 const navItems = [
-  { key: 'nav.moodboards' as const, path: '/moodboards' },
-  { key: 'nav.shop' as const, path: '/boutique' },
+  { key: 'nav.art' as const, path: '/l-art' },
   { key: 'nav.about' as const, path: '/a-propos' },
   { key: 'nav.contact' as const, path: '/contact' },
 ];
@@ -20,8 +20,8 @@ const otherLang = lang === 'fr' ? 'en' : 'fr';
 
 <header class="border-b border-sand/30">
   <nav class="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
-    <a href={getLocalizedPath('/', lang)} class="font-serif text-2xl tracking-wide text-ink">
-      maison gregotte
+    <a href={getLocalizedPath('/', lang)} class="wordmark-link text-2xl text-ink">
+      <Wordmark dot />
     </a>
 
     <div class="hidden md:flex items-center gap-8">

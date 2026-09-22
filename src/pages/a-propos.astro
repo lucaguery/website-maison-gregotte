@@ -1,58 +1,43 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import { t } from '../i18n/translations';
-import portraitImg from '../assets/images/moodboard-atelier.jpg';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { t } from "../i18n/translations";
+import portraitImg from "../assets/images/portrait-laura.jpg";
 
-const lang = 'fr';
+const lang = "fr";
 ---
 
-<BaseLayout title={`${t(lang, 'nav.about')} — laura gregori`}>
+<BaseLayout title={`${t(lang, "nav.about")} — laura gregori`}>
   <section class="px-6 py-section max-w-5xl mx-auto">
-    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">{t(lang, 'about.title')}</h1>
-    <p class="text-earth mb-12">{t(lang, 'about.subtitle')}</p>
+    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">
+      {t(lang, "about.title")}
+    </h1>
+    <p class="text-earth mb-12">{t(lang, "about.subtitle")}</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
       <!-- Portrait -->
-      <div class="aspect-4/5 overflow-hidden rounded-sm bg-linen">
+      <div class="overflow-hidden rounded-sm bg-linen">
         <Image
           src={portraitImg}
-          alt="L'atelier de laura gregori"
-          width={600}
-          height={750}
-          class="h-full w-full object-cover"
+          alt="laura gregori dans les vignes"
+          width={800}
+          class="w-full h-auto"
         />
       </div>
 
       <!-- Bio -->
       <div class="space-y-6 text-ink/85 leading-relaxed">
+        <p>Laura Gregori est une jeune artiste basée à Paris.</p>
         <p>
-          laura gregori — une passion simple : celle des belles choses
-          qui racontent une histoire. Installée dans le sud de la France, je chine,
-          je peins et je compose des univers visuels où se mêlent l'ancien et le
-          contemporain.
+          Elle travaille principalement le pastel à l'huile, le collage et
+          l'aquarelle.
         </p>
         <p>
-          Chaque pièce proposée — qu'il s'agisse d'une toile, d'un vase chiné ou
-          d'un objet oublié — est choisie ou créée avec le même soin : celui du
-          geste juste, de la matière qui vieillit bien, de la couleur qui apaise.
+          Elle aime passer d'une technique à une autre, explorer leurs matières
+          et leurs possibilités et trouver pour chaque inspiration la manière qui
+          lui correspond.
         </p>
-        <p>
-          Les moodboards que je partage ici sont des carnets d'inspirations
-          ouverts. Ils nourrissent mon travail et, je l'espère, le vôtre aussi.
-          N'hésitez pas à me contacter si une pièce vous plaît ou si vous cherchez
-          quelque chose de particulier.
-        </p>
-
-        <div class="pt-4 border-t border-sand/30">
-          <h3 class="font-serif text-lg text-ink mb-3">En quelques mots</h3>
-          <ul class="space-y-2 text-sm text-earth">
-            <li>Peintre autodidacte & chineuse passionnée</li>
-            <li>Basée dans le sud de la France</li>
-            <li>Huile sur toile, acrylique, techniques mixtes</li>
-            <li>Objets vintage des années 50 à 80</li>
-          </ul>
-        </div>
+        <p>Chaque oeuvre est réalisée à la main, dans son atelier à Paris</p>
       </div>
     </div>
   </section>

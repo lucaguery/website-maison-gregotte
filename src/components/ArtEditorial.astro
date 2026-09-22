@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import type { Lang } from '../i18n/translations';
 import { getLocalizedPath, t } from '../i18n/translations';
 
-type ArtKind = 'painting' | 'vintage' | 'moodboard';
+type ArtKind = 'pastel' | 'watercolor' | 'collage';
 
 interface Item {
   title: string;
@@ -27,12 +27,8 @@ const { lang, title, subtitle, items } = Astro.props;
 const shown = items.slice(0, 4);
 const moreLabel = lang === 'fr' ? 'voir tout l\'art' : 'see all the art';
 const slotClasses = ['mb-slot-1', 'mb-slot-2', 'mb-slot-3', 'mb-slot-4'];
-const aspects = [
-  'aspect-[5/4]',
-  'aspect-[2/3]',
-  'aspect-[1/1]',
-  'aspect-[16/10]',
-];
+// The lead work fills its slot; the rest stay smaller so the hierarchy holds.
+const caps = ['md:max-h-[38rem]', 'md:max-h-[22rem]', 'md:max-h-[26rem]', 'md:max-h-[28rem]'];
 
 const formatPrice = (price: number, currency: string) =>
   new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
@@ -69,13 +65,12 @@ const kindLabel = (kind: ArtKind) =>
     {shown.map((it, i) => (
       <article class={`group reveal-item ${slotClasses[i]}`}>
         <a href={getLocalizedPath('/l-art', lang) + '#' + it.slug} class="block">
-          <div class={`${aspects[i]} overflow-hidden bg-linen relative`}>
+          <div class="overflow-hidden bg-linen relative md:w-fit">
             <Image
               src={it.cover}
               alt={it.title}
-              width={720}
-              height={720}
-              class="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+              width={900}
+              class:list={[`w-full h-auto md:w-auto md:max-w-full ${caps[i]}`, "transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"]}
             />
             {it.sold && (
               <span class="absolute top-3 left-3 text-[10px] uppercase tracking-[0.25em] bg-cream/90 text-terracotta px-2 py-1">

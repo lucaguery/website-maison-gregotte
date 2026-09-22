@@ -50,14 +50,13 @@ const isWordmarkTitle = title === 'laura gregori';
 
     <!-- RIGHT: Image — framed like a physical artwork on a wall -->
     <div class="hero-image-wrap order-1 md:order-2">
-      <div class="hero-artframe" data-hero-artframe>
-        <div class="hero-artframe-inner aspect-[4/5]">
+      <div class="hero-artframe md:w-fit md:ml-auto" data-hero-artframe>
+        <div class="hero-artframe-inner">
           <Image
             src={heroImage}
             alt=""
-            width={800}
-            height={1000}
-            class="hero-image h-full w-full object-cover"
+            width={1400}
+            class="hero-image w-full h-auto md:w-auto md:max-w-full md:max-h-[68vh]"
             loading="eager"
           />
         </div>

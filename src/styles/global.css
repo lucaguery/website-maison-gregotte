@@ -365,10 +365,10 @@ body::before {
 }
 
 /* moodboard asymmetric spans — dramatic stagger, mixed aspects */
-.mb-slot-1 { grid-column: 1 / span 8;  grid-row: 1; margin-top: 0;    }
+.mb-slot-1 { grid-column: 1 / span 6;  grid-row: 1; margin-top: 0;    }
 .mb-slot-2 { grid-column: 10 / span 3; grid-row: 1; margin-top: 7.5rem; padding-left: 0.5rem; }
 .mb-slot-3 { grid-column: 3 / span 4;  grid-row: 2; margin-top: 2.5rem; }
-.mb-slot-4 { grid-column: 8 / span 5;  grid-row: 2; margin-top: -4rem; }
+.mb-slot-4 { grid-column: 8 / span 5;  grid-row: 2; margin-top: 1rem;  }
 
 /* shop asymmetric spans — deeper offsets, stronger column deltas */
 .sh-slot-1 { grid-column: 1 / span 7;  grid-row: 1; margin-top: 0;     }
@@ -425,8 +425,10 @@ body::before {
   line-height: 1;
 }
 
+/* The dot only wears terracotta during the typing animation — once struck,
+   and everywhere the wordmark sits static, it reads as plain ink. */
 .wordmark-dot {
-  color: var(--color-terracotta);
+  color: var(--color-ink);
   font-family: var(--font-display);
   font-weight: 500;
   margin-left: -0.06em;

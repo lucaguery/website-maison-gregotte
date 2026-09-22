@@ -6,36 +6,24 @@ import { t } from '../i18n/translations';
 
 const lang = 'fr';
 
-const [moodboards, products] = await Promise.all([
-  getCollection('moodboards'),
-  getCollection('products'),
-]);
+const products = await getCollection('products');
 
-const items = [
-  ...products
-    .filter((p) => p.data.lang === lang)
-    .map((p) => ({
-      title: p.data.title,
-      description: p.data.description,
-      cover: p.data.cover,
-      slug: p.id,
-      kind: p.data.category as 'painting' | 'vintage',
-      price: p.data.price,
-      currency: p.data.currency,
-      sold: p.data.sold,
-      date: p.data.date,
-    })),
-  ...moodboards
-    .filter((m) => m.data.lang === lang)
-    .map((m) => ({
-      title: m.data.title,
-      description: m.data.description,
-      cover: m.data.cover,
-      slug: m.id,
-      kind: 'moodboard' as const,
-      date: m.data.date,
-    })),
-].sort((a, b) => b.date.getTime() - a.date.getTime());
+const items = products
+  .filter((p) => p.data.lang === lang)
+  .map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    cover: p.data.cover,
+    slug: p.id,
+    kind: p.data.category,
+    price: p.data.price,
+    currency: p.data.currency,
+    sold: p.data.sold,
+    dimensions: p.data.dimensions,
+    date: p.data.date,
+  }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
 ---
 
 <BaseLayout title={`${t(lang, 'art.title')} — laura gregori`}>

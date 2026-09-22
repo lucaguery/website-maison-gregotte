@@ -2,7 +2,7 @@
 title: "bouquet de pavots"
 lang: fr
 description: "Pastel à l'huile sur papier, bouquet de pavots sur talus vert."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-01

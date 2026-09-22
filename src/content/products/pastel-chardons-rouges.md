@@ -2,7 +2,7 @@
 title: "chardons grenat"
 lang: fr
 description: "Pastel à l'huile sur papier, chardons grenat sur fond bleu."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-02

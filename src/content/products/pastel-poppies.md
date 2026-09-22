@@ -2,7 +2,7 @@
 title: "three poppies"
 lang: en
 description: "Oil pastel on paper, three red poppies on a blue-grey ground."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-04

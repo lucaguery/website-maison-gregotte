@@ -2,7 +2,7 @@
 title: "the mesa"
 lang: en
 description: "Paper collage, magazine cut-outs on a cream ground."
-price: 140
+price: 100
 category: collage
 sold: false
 date: 2026-08-20

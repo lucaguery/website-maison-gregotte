@@ -2,7 +2,7 @@
 title: "the procession"
 lang: en
 description: "Paper collage, a line of cars and cut flowers under the moon."
-price: 140
+price: 100
 category: collage
 sold: false
 date: 2026-08-14

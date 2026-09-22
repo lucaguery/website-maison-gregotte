@@ -2,7 +2,7 @@
 title: "tulipes en rang"
 lang: fr
 description: "Pastel à l'huile sur papier, trois tulipes sur fond bleu."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-05

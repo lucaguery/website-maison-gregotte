@@ -2,7 +2,7 @@
 title: "la mesa"
 lang: fr
 description: "Collage papier, découpes de revues sur fond crème."
-price: 140
+price: 100
 category: collage
 sold: false
 date: 2026-08-20

@@ -2,7 +2,7 @@
 title: "tulips in a row"
 lang: en
 description: "Oil pastel on paper, three tulips on a blue ground."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-05

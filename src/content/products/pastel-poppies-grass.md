@@ -2,7 +2,7 @@
 title: "poppies on the grass"
 lang: en
 description: "Oil pastel on paper, three poppies on a line of grass."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-06

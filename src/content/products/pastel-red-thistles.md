@@ -2,7 +2,7 @@
 title: "garnet thistles"
 lang: en
 description: "Oil pastel on paper, garnet thistles on a blue ground."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-02

@@ -2,7 +2,7 @@
 title: "pavots sur l'herbe"
 lang: fr
 description: "Pastel à l'huile sur papier, trois pavots sur une ligne d'herbe."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-06

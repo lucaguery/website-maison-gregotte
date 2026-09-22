@@ -2,7 +2,7 @@
 title: "aquarelle iii — à venir"
 lang: fr
 description: "Série d'aquarelles en cours — les pièces arrivent bientôt."
-price: 130
+price: 100
 category: watercolor
 sold: false
 date: 2026-07-08

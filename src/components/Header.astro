@@ -19,12 +19,19 @@ const otherLang = lang === 'fr' ? 'en' : 'fr';
 ---
 
 <header class="border-b border-sand/30">
-  <nav class="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
+  <nav class="mx-auto max-w-7xl px-6 py-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
     <a href={getLocalizedPath('/', lang)} class="wordmark-link text-2xl text-ink">
       <Wordmark dot />
     </a>
 
-    <div class="hidden md:flex items-center gap-8">
+    <a
+      href={getLocalizedPath(Astro.url.pathname, otherLang)}
+      class="order-2 text-xs uppercase tracking-widest text-earth hover:text-ink transition-colors border border-sand/50 px-3 py-1.5 rounded-full"
+    >
+      {languages[otherLang]}
+    </a>
+
+    <div class="order-3 w-full md:order-none md:w-auto flex items-center justify-center md:justify-start gap-6 md:gap-8">
       {navItems.map((item) => (
         <a
           href={getLocalizedPath(item.path, lang)}
@@ -34,12 +41,5 @@ const otherLang = lang === 'fr' ? 'en' : 'fr';
         </a>
       ))}
     </div>
-
-    <a
-      href={getLocalizedPath(Astro.url.pathname, otherLang)}
-      class="text-xs uppercase tracking-widest text-earth hover:text-ink transition-colors border border-sand/50 px-3 py-1.5 rounded-full"
-    >
-      {languages[otherLang]}
-    </a>
   </nav>
 </header>

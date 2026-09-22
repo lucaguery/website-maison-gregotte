@@ -2,7 +2,7 @@
 title: "poppy bouquet"
 lang: en
 description: "Oil pastel on paper, a poppy bouquet on a green bank."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-01

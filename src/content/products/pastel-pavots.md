@@ -2,7 +2,7 @@
 title: "trois pavots"
 lang: fr
 description: "Pastel à l'huile sur papier, trois pavots rouges sur fond bleu-gris."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-04

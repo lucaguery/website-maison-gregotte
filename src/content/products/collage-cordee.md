@@ -2,7 +2,7 @@
 title: "la cordée"
 lang: fr
 description: "Collage papier, marcheurs sur la neige et prairies fleuries."
-price: 160
+price: 100
 category: collage
 sold: false
 date: 2026-08-06

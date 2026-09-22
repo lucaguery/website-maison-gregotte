@@ -2,7 +2,7 @@
 title: "chardons bleus"
 lang: fr
 description: "Pastel à l'huile sur papier, chardons bleus sur fond terre de Sienne."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-03

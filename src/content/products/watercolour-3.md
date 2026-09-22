@@ -2,7 +2,7 @@
 title: "watercolour iii — coming soon"
 lang: en
 description: "Watercolour series in progress — pieces coming soon."
-price: 130
+price: 100
 category: watercolor
 sold: false
 date: 2026-07-08

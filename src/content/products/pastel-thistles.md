@@ -2,7 +2,7 @@
 title: "blue thistles"
 lang: en
 description: "Oil pastel on paper, blue thistles on a burnt sienna ground."
-price: 80
+price: 100
 category: pastel
 sold: false
 date: 2026-09-03

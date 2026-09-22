@@ -2,7 +2,7 @@
 title: "le cortège"
 lang: fr
 description: "Collage papier, file de voitures et fleurs coupées sous la lune."
-price: 140
+price: 100
 category: collage
 sold: false
 date: 2026-08-14

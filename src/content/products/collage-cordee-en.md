@@ -2,7 +2,7 @@
 title: "the rope party"
 lang: en
 description: "Paper collage, walkers on snow above flowering meadows."
-price: 160
+price: 100
 category: collage
 sold: false
 date: 2026-08-06

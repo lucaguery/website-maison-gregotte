@@ -3,7 +3,7 @@ title: "the procession"
 lang: en
 description: "Paper collage, a line of cars and cut flowers under the moon."
 category: collage
-sold: false
+sold: true
 date: 2026-08-14
 dimensions: "18 x 24 cm"
 cover: ../../assets/images/collage-cortege.jpg

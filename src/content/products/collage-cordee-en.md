@@ -3,7 +3,7 @@ title: "the rope party"
 lang: en
 description: "Paper collage, walkers on snow above flowering meadows."
 category: collage
-sold: false
+sold: true
 date: 2026-08-06
 dimensions: "24 x 30 cm"
 cover: ../../assets/images/collage-cordee.jpg

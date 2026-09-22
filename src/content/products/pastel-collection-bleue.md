@@ -1,7 +1,7 @@
 ---
-title: "collection bleue"
+title: "collection nuageuse"
 lang: fr
-description: "Série de fleurs peintes sur lin, fond bleu et motifs graphiques blancs."
+description: "Série de fleurs peintes sur coton, fond bleu et motifs graphiques blancs."
 price: 100
 category: pastel
 sold: true
@@ -11,7 +11,7 @@ cover: ../../assets/images/pastel-collection-bleue-1.jpg
 images:
   - ../../assets/images/pastel-collection-bleue-2.jpg
   - ../../assets/images/pastel-collection-bleue-3.jpg
-tags: ["pastel", "lin", "fleurs", "série"]
+tags: ["pastel", "coton", "fleurs", "série"]
 ---
 
-Huit petites études de fleurs sur lin bleu, présentées ici par planches de quatre.
+Huit petites études de fleurs sur coton bleu, présentées ici par planches de quatre.

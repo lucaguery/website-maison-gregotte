@@ -1,7 +1,7 @@
 ---
-title: "blue collection"
+title: "cloud collection"
 lang: en
-description: "Series of flowers painted on linen, blue ground with graphic white motifs."
+description: "Series of flowers painted on cotton, blue ground with graphic white motifs."
 price: 100
 category: pastel
 sold: true
@@ -11,7 +11,7 @@ cover: ../../assets/images/pastel-collection-bleue-1.jpg
 images:
   - ../../assets/images/pastel-collection-bleue-2.jpg
   - ../../assets/images/pastel-collection-bleue-3.jpg
-tags: ["pastel", "linen", "flowers", "series"]
+tags: ["pastel", "cotton", "flowers", "series"]
 ---
 
-Eight small flower studies on blue linen, shown here in two boards of four.
+Eight small flower studies on blue cotton, shown here in two boards of four.

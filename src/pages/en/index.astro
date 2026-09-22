@@ -23,7 +23,7 @@ const items = products
     sold: p.data.sold,
     date: p.data.date,
   }))
-  .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .sort((a, b) => Number(a.sold) - Number(b.sold) || b.date.getTime() - a.date.getTime())
   .slice(0, 4);
 
 const tagline = 'oil pastel paintings, collages and watercolours. works where colour, light and material take centre stage.';

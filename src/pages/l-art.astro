@@ -22,7 +22,7 @@ const items = products
     dimensions: p.data.dimensions,
     date: p.data.date,
   }))
-  .sort((a, b) => b.date.getTime() - a.date.getTime());
+  .sort((a, b) => Number(a.sold) - Number(b.sold) || b.date.getTime() - a.date.getTime());
 
 ---
 

@@ -4,7 +4,7 @@ lang: fr
 description: "Aquarelle, diptyque de fleurs graphiques sur fond bleu-gris."
 price: 100
 category: watercolor
-sold: false
+sold: true
 date: 2026-09-22
 dimensions: "18 x 24 cm (chaque feuille)"
 cover: ../../assets/images/aquarelle-etudes-bleues.jpg

@@ -9,7 +9,7 @@ const products = defineCollection({
       title: z.string(),
       lang: z.enum(['fr', 'en']),
       description: z.string(),
-      price: z.number(),
+      price: z.number().optional(),
       currency: z.enum(['EUR', 'USD']).default('EUR'),
       category: z.enum(['pastel', 'watercolor', 'collage']),
       sold: z.boolean().default(false),

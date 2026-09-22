@@ -12,7 +12,9 @@ const lang = 'en';
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
       <!-- Contact form -->
-      <form class="space-y-6">
+      <form class="space-y-6" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="bfdbd02f-fcf3-4e61-ae97-5a5f32f8af62" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <div>
           <label for="name" class="block text-sm text-earth mb-2">{t(lang, 'contact.name')}</label>
           <input

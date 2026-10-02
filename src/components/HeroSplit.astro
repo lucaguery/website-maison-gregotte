@@ -18,10 +18,10 @@ const isWordmarkTitle = title === 'laura gregori';
 ---
 
 <section class="hero-split relative bg-cream">
-  <div class="max-w-7xl mx-auto px-6 pt-24 pb-14 md:pt-28 md:pb-20 grid md:grid-cols-[1fr_1fr] gap-10 md:gap-14 items-center min-h-[68vh]">
+  <div class="max-w-7xl mx-auto px-6 pt-24 pb-14 md:pt-28 md:pb-0 grid md:grid-cols-[4fr_7fr] gap-10 md:gap-14 items-center md:items-end md:min-h-[calc(100svh-73px)]">
 
     <!-- LEFT: Text -->
-    <div class="hero-copy order-2 md:order-1 relative">
+    <div class="hero-copy order-2 md:order-1 relative md:pb-6">
       <span class="hero-stamp hidden md:block absolute -top-8 -left-1 text-[10px] uppercase tracking-[0.35em] text-terracotta/80">
         {stampLabel}
       </span>
@@ -48,15 +48,15 @@ const isWordmarkTitle = title === 'laura gregori';
       </a>
     </div>
 
-    <!-- RIGHT: Image — framed like a physical artwork on a wall -->
+    <!-- RIGHT: Image — rests on the bottom edge of the viewport -->
     <div class="hero-image-wrap order-1 md:order-2">
-      <div class="hero-artframe md:w-fit md:ml-auto" data-hero-artframe>
+      <div class="hero-artframe md:w-fit md:ml-auto">
         <div class="hero-artframe-inner">
           <Image
             src={heroImage}
             alt=""
             width={1400}
-            class="hero-image w-full h-auto md:w-auto md:max-w-full md:max-h-[68vh]"
+            class="hero-image w-full h-auto md:w-auto md:max-w-full md:max-h-[calc(100svh-73px-7rem)]"
             loading="eager"
           />
         </div>
@@ -64,29 +64,3 @@ const isWordmarkTitle = title === 'laura gregori';
     </div>
   </div>
 </section>
-
-<script>
-  // Cursor-reactive subtle tilt — makes the canvas feel alive.
-  const frame = document.querySelector<HTMLElement>('[data-hero-artframe]');
-  if (frame && window.matchMedia('(prefers-reduced-motion: no-preference)').matches && window.matchMedia('(pointer: fine)').matches) {
-    const BASE_Y = -6;
-    const BASE_Z = -1.2;
-    const RANGE_Y = 3;
-    const RANGE_Z = 0.8;
-    let raf = 0;
-    let tx = 0, ty = 0;
-
-    const update = () => {
-      frame.style.transform = `rotateY(${BASE_Y + tx}deg) rotateZ(${BASE_Z + ty}deg) translateZ(0)`;
-      raf = 0;
-    };
-
-    window.addEventListener('pointermove', (e) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      tx = ((e.clientX / w) - 0.5) * 2 * RANGE_Y;
-      ty = ((e.clientY / h) - 0.5) * 2 * RANGE_Z;
-      if (!raf) raf = requestAnimationFrame(update);
-    }, { passive: true });
-  }
-</script>

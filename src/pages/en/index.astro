@@ -4,7 +4,7 @@ import HeroSplit from '../../components/HeroSplit.astro';
 import ArtEditorial from '../../components/ArtEditorial.astro';
 import { getCollection } from 'astro:content';
 import { t } from '../../i18n/translations';
-import heroImage from '../../assets/images/hero-pavots.jpg';
+import heroImage from '../../assets/images/collage-cortege.jpg';
 
 const lang = 'en';
 
@@ -26,7 +26,7 @@ const items = products
   .sort((a, b) => Number(a.sold) - Number(b.sold) || b.date.getTime() - a.date.getTime())
   .slice(0, 4);
 
-const tagline = 'oil pastel paintings, collages and watercolours. works where colour, light and material take centre stage.';
+const tagline = 'oil pastel paintings and collages. works where colour, light and material take centre stage.';
 ---
 
 <BaseLayout>

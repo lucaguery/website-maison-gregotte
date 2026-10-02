@@ -26,9 +26,6 @@ interface Props {
 const { lang, title, subtitle, items } = Astro.props;
 const shown = items.slice(0, 4);
 const moreLabel = lang === 'fr' ? 'voir tout l\'art' : 'see all the art';
-const slotClasses = ['mb-slot-1', 'mb-slot-2', 'mb-slot-3', 'mb-slot-4'];
-// The lead work fills its slot; the rest stay smaller so the hierarchy holds.
-const caps = ['md:max-h-[38rem]', 'md:max-h-[22rem]', 'md:max-h-[26rem]', 'md:max-h-[28rem]'];
 
 const formatPrice = (price: number, currency: string) =>
   new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
@@ -42,7 +39,7 @@ const kindLabel = (kind: ArtKind) =>
 ---
 
 <section class="relative px-6 py-section max-w-7xl mx-auto">
-  <header class="flex items-end justify-between mb-10 md:mb-14 gap-6">
+  <header class="flex flex-col items-start md:flex-row md:items-end md:justify-between mb-10 md:mb-14 gap-6">
     <div>
       <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-ink lowercase">
         <span class="accent-tick"></span>{title}
@@ -61,41 +58,36 @@ const kindLabel = (kind: ArtKind) =>
     </a>
   </header>
 
-  <div class="editorial-grid">
+  <div class="editorial-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
     {shown.map((it, i) => (
-      <article class={`group reveal-item ${slotClasses[i]}`}>
+      <article class="group reveal-item">
         <a href={getLocalizedPath('/l-art', lang) + '#' + it.slug} class="block">
-          <div class="overflow-hidden bg-linen relative md:w-fit">
+          <div class="art-frame">
             <Image
               src={it.cover}
               alt={it.title}
               width={900}
-              class:list={[`w-full h-auto md:w-auto md:max-w-full ${caps[i]}`, "transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"]}
+              class="transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
             />
-            {it.sold && (
-              <span class="absolute top-3 left-3 text-[10px] uppercase tracking-[0.25em] bg-cream/90 text-terracotta px-2 py-1">
-                {t(lang, 'shop.sold')}
-              </span>
-            )}
           </div>
-          <div class="mt-3 flex items-baseline gap-3 flex-wrap">
+          <div class="mt-5 flex items-baseline gap-3">
             <span class="text-xs text-earth/60 tabular-nums">
               {String(i + 1).padStart(2, '0')}
             </span>
             <h3 class="text-base md:text-lg text-ink lowercase tracking-tight">
               {it.title}
             </h3>
-            <span class="text-[10px] uppercase tracking-[0.25em] text-earth/60 ml-auto">
-              {kindLabel(it.kind)}
-            </span>
           </div>
-          <div class="mt-1 ml-8 flex items-baseline justify-between gap-4">
+          <p class="mt-1.5 ml-8 text-[10px] uppercase tracking-[0.25em] text-earth/50">
+            {kindLabel(it.kind)}
+          </p>
+          <div class="mt-2 ml-8 flex items-baseline justify-between gap-4">
             <p class="text-sm text-earth/75 max-w-sm leading-relaxed line-clamp-2">
               {it.description}
             </p>
             {typeof it.price === 'number' && it.currency && (
               <p class="text-sm text-ink tabular-nums shrink-0">
-                {it.sold ? '—' : formatPrice(it.price, it.currency)}
+                {it.sold ? t(lang, 'shop.sold') : formatPrice(it.price, it.currency)}
               </p>
             )}
           </div>

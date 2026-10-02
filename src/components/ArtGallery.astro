@@ -27,7 +27,6 @@ const { lang, items } = Astro.props;
 const filters = [
   { key: 'all', label: t(lang, 'art.filter.all') },
   { key: 'pastel', label: t(lang, 'art.filter.pastel') },
-  { key: 'watercolor', label: t(lang, 'art.filter.watercolor') },
   { key: 'collage', label: t(lang, 'art.filter.collage') },
 ];
 
@@ -42,7 +41,7 @@ const kindLabel = (kind: ArtKind) => t(lang, `art.kind.${kind}` as const);
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-// Picture rail: four works hang from each hairline, tops flush, bottoms ragged.
+// Picture rail: four works per hairline, each resting on a shared baseline.
 // Each image keeps its own proportions — a work is never cropped to fit a slot.
 const PER_ROW = 4;
 
@@ -81,7 +80,7 @@ const rows = Array.from(
   </div>
 
   <!-- Mixed gallery — each row hangs from a shared picture rail -->
-  <div class="art-gallery grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-8 items-start">
+  <div class="art-gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 items-start">
     {rows.map((row, r) => (
       <Fragment>
         <div class:list={['art-rail col-span-full flex items-center gap-3', r > 0 && 'mt-6']}>
@@ -101,18 +100,13 @@ const rows = Array.from(
               class="art-item group flex flex-col"
               data-kind={it.kind}
             >
-              <div class="overflow-hidden bg-linen relative">
+              <div class="art-frame">
                 <Image
                   src={it.cover}
                   alt={it.title}
                   width={900}
-                  class="w-full h-auto transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                  class="transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                 />
-                {it.sold && (
-                  <span class="absolute top-3 left-3 text-[10px] uppercase tracking-[0.25em] bg-cream/90 text-terracotta px-2 py-1">
-                    {t(lang, 'shop.sold')}
-                  </span>
-                )}
               </div>
               <div class="mt-4 grid grid-cols-[auto_1fr_auto] items-baseline gap-x-3">
                 <span class="art-num text-xs text-earth/55 tabular-nums">{pad(i + 1)}</span>
@@ -121,7 +115,7 @@ const rows = Array.from(
                 </h3>
                 {typeof it.price === 'number' && it.currency && (
                   <p class="text-sm text-ink tabular-nums">
-                    {it.sold ? '—' : formatPrice(it.price, it.currency)}
+                    {it.sold ? t(lang, 'shop.sold') : formatPrice(it.price, it.currency)}
                   </p>
                 )}
               </div>

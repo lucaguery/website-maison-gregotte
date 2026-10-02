@@ -2,6 +2,7 @@
 import { t } from '../i18n/translations';
 import type { Lang } from '../i18n/translations';
 import Wordmark from './Wordmark.astro';
+import Flower from '../assets/flower.svg';
 
 interface Props {
   lang: Lang;
@@ -13,7 +14,8 @@ const year = new Date().getFullYear();
 
 <footer class="border-t border-sand/30 mt-auto">
   <div class="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    <p class="text-lg text-earth">
+    <p class="text-lg text-earth flex items-center gap-2.5">
+      <Flower class="h-6 w-auto" aria-hidden="true" />
       <Wordmark dot />
     </p>
     <p class="text-sm text-earth/70 text-center md:text-left">

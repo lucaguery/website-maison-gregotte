@@ -20,6 +20,7 @@ const items = products
     currency: p.data.currency,
     sold: p.data.sold,
     dimensions: p.data.dimensions,
+    framed: p.data.framed,
     date: p.data.date,
   }))
   .sort((a, b) => Number(a.sold) - Number(b.sold) || b.date.getTime() - a.date.getTime());

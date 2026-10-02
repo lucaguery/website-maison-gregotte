@@ -6,13 +6,17 @@ const lang = 'fr';
 ---
 
 <BaseLayout title={`${t(lang, 'nav.contact')} — laura gregori`}>
-  <section class="px-6 py-section max-w-3xl mx-auto">
-    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">{t(lang, 'contact.title')}</h1>
-    <p class="text-earth mb-12">{t(lang, 'contact.subtitle')}</p>
+  <section class="px-6 py-section max-w-7xl mx-auto">
+    <header class="mb-10 md:mb-14">
+      <h1 class="text-4xl md:text-6xl font-medium tracking-tight text-ink lowercase">
+        <span class="accent-tick"></span>{t(lang, 'contact.title')}
+      </h1>
+      <p class="mt-4 ml-8 text-base md:text-lg text-earth/85 max-w-xl leading-relaxed">{t(lang, 'contact.subtitle')}</p>
+    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div class="ml-0 md:ml-8 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6">
       <!-- Contact form -->
-      <form class="space-y-6" action="https://api.web3forms.com/submit" method="POST">
+      <form class="md:col-span-6 lg:col-span-5 space-y-6" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="bfdbd02f-fcf3-4e61-ae97-5a5f32f8af62" />
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <div>
@@ -57,11 +61,11 @@ const lang = 'fr';
       </form>
 
       <!-- Contact info -->
-      <div class="space-y-8">
+      <div class="md:col-span-5 md:col-start-8 space-y-8">
         <div>
           <h3 class="font-serif text-lg text-ink mb-3">Coordonnées</h3>
           <ul class="space-y-3 text-sm text-earth">
-            <li>lauragregori.art@gmail.com</li>
+            <li><a href="mailto:lauragregori.art@gmail.com" class="hover:text-ink transition-colors">lauragregori.art@gmail.com</a></li>
           </ul>
         </div>
 

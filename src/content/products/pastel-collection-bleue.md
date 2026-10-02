@@ -6,6 +6,7 @@ price: 100
 category: pastel
 sold: true
 date: 2026-09-22
+framed: false
 dimensions: "13 x 18 cm (chaque pièce)"
 cover: ../../assets/images/pastel-collection-bleue-1.jpg
 images:

@@ -17,6 +17,7 @@ const products = defineCollection({
       cover: image(),
       images: z.array(image()).optional(),
       dimensions: z.string().optional(),
+      framed: z.boolean().default(true),
       tags: z.array(z.string()).optional(),
     }),
 });

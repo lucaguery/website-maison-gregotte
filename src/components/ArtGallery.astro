@@ -15,6 +15,7 @@ interface Item {
   currency?: string;
   sold?: boolean;
   dimensions?: string;
+  framed?: boolean;
 }
 
 interface Props {
@@ -80,7 +81,7 @@ const rows = Array.from(
   </div>
 
   <!-- Mixed gallery — each row hangs from a shared picture rail -->
-  <div class="art-gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 items-start">
+  <div class="art-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 items-start">
     {rows.map((row, r) => (
       <Fragment>
         <div class:list={['art-rail col-span-full flex items-center gap-3', r > 0 && 'mt-6']}>
@@ -108,25 +109,30 @@ const rows = Array.from(
                   class="transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
-              <div class="mt-4 grid grid-cols-[auto_1fr_auto] items-baseline gap-x-3">
+              <div class="mt-5 grid grid-cols-[auto_1fr] items-baseline gap-x-3">
                 <span class="art-num text-xs text-earth/55 tabular-nums">{pad(i + 1)}</span>
                 <h3 class="text-base md:text-lg text-ink lowercase tracking-tight">
                   {it.title}
                 </h3>
-                {typeof it.price === 'number' && it.currency && (
-                  <p class="text-sm text-ink tabular-nums">
-                    {it.sold ? t(lang, 'shop.sold') : formatPrice(it.price, it.currency)}
-                  </p>
-                )}
               </div>
-              <p class="mt-1.5 ml-8 text-[10px] uppercase tracking-[0.25em] text-earth/50">
-                {[kindLabel(it.kind), it.dimensions, it.dimensions && t(lang, 'art.framed')]
+              <p class="mt-1.5 ml-8 text-[10px] uppercase tracking-[0.25em] text-earth/65">
+                {[kindLabel(it.kind), it.dimensions, it.dimensions && it.framed && t(lang, 'art.framed')]
                   .filter(Boolean)
                   .join(' · ')}
               </p>
               <p class="mt-2 ml-8 text-sm text-earth/75 max-w-md leading-relaxed">
                 {it.description}
               </p>
+              {(typeof it.price === 'number' || it.sold) && (
+                <p class="mt-3 ml-8 flex items-center gap-3 text-sm text-ink tabular-nums">
+                  {typeof it.price === 'number' && it.currency && formatPrice(it.price, it.currency)}
+                  {it.sold && (
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-terracotta border border-terracotta/40 px-1.5 py-0.5">
+                      {t(lang, 'shop.sold')}
+                    </span>
+                  )}
+                </p>
+              )}
             </article>
           );
         })}

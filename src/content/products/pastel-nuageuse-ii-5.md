@@ -1,11 +1,12 @@
 ---
-title: "les jumelles"
+title: "série fleur de coton — les jumelles"
 lang: fr
 description: "Pastel sur coton frangé, deux fleurs blanches, tracé brun-noir sur fond bleu."
-price: 100
+price: 130
 category: pastel
-sold: false
+sold: true
 date: 2026-10-01
+framed: false
 dimensions: "13 x 18 cm"
 cover: ../../assets/images/pastel-nuageuse-ii-5.webp
 tags: ["pastel", "coton", "fleurs"]

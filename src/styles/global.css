@@ -300,12 +300,14 @@ body::before {
 .art-frame {
   position: relative;
   aspect-ratio: 4 / 5;
+  min-height: 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
 .art-frame img {
+  display: block;
   width: auto;
   height: auto;
   max-width: 100%;

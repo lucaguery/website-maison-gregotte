@@ -8,15 +8,17 @@ const lang = "fr";
 ---
 
 <BaseLayout title={`${t(lang, "nav.about")} — laura gregori`}>
-  <section class="px-6 py-section max-w-5xl mx-auto">
-    <h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">
-      {t(lang, "about.title")}
-    </h1>
-    <p class="text-earth mb-12">{t(lang, "about.subtitle")}</p>
+  <section class="px-6 py-section max-w-7xl mx-auto">
+    <header class="mb-10 md:mb-14">
+      <h1 class="text-4xl md:text-6xl font-medium tracking-tight text-ink lowercase">
+        <span class="accent-tick"></span>{t(lang, "about.title")}
+      </h1>
+      <p class="mt-4 ml-8 text-base md:text-lg text-earth/85 max-w-xl leading-relaxed">{t(lang, "about.subtitle")}</p>
+    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <div class="ml-0 md:ml-8 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-center">
       <!-- Portrait -->
-      <div class="overflow-hidden rounded-sm bg-linen">
+      <div class="md:col-span-5 overflow-hidden bg-linen">
         <Image
           src={portraitImg}
           alt="laura gregori dans les vignes"
@@ -26,7 +28,7 @@ const lang = "fr";
       </div>
 
       <!-- Bio -->
-      <div class="space-y-6 text-ink/85 leading-relaxed">
+      <div class="md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-7 space-y-6 text-ink/85 leading-relaxed md:text-lg">
         <p>laura gregori est une jeune artiste basée à Paris.</p>
         <p>
           Elle travaille principalement le pastel à l'huile et le collage.

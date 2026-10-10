@@ -25,7 +25,9 @@ interface Props {
 
 const { lang, title, subtitle, items } = Astro.props;
 const shown = items.slice(0, 4);
-const moreLabel = lang === 'fr' ? 'voir tout l\'art' : 'see all the art';
+const moreLabel = lang === 'fr'
+  ? `voir les ${items.length} œuvres`
+  : `see all ${items.length} works`;
 
 const formatPrice = (price: number, currency: string) =>
   new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
@@ -97,6 +99,16 @@ const kindLabel = (kind: ArtKind) =>
         </a>
       </article>
     ))}
+  </div>
+
+  <div class="mt-14 md:mt-20 flex justify-center">
+    <a
+      href={getLocalizedPath('/l-art', lang)}
+      class="group inline-flex items-center gap-3 border border-ink/70 px-8 py-4 text-xs uppercase tracking-[0.3em] text-ink hover:bg-ink hover:text-cream transition-colors duration-500"
+    >
+      {moreLabel}
+      <span aria-hidden="true" class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+    </a>
   </div>
 </section>
 

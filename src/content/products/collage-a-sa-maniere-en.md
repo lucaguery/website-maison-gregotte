@@ -1,7 +1,8 @@
 ---
-title: "her own way"
+title: "à sa manière"
 lang: en
 description: "Paper collage, a black-and-white portrait and an orange moon on a red ground."
+price: 200
 category: collage
 sold: false
 date: 2026-11-11

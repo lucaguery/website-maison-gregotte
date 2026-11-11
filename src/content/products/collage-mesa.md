@@ -1,5 +1,5 @@
 ---
-title: "la mesa"
+title: "oui oui baguette"
 lang: fr
 description: "Collage papier, découpes de revues sur fond crème."
 category: collage

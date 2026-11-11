@@ -15,12 +15,31 @@ for (const locale of ['', 'en/']) {
         }
       }
       assert.doesNotMatch(html, /pastel-nuageuse-ii-|pastel-collection-bleue/);
+      assert.doesNotMatch(html, /pastel-coton-cascade|pastel-tulipes|pastel-pavots\.|pastel-bouquet/);
       if (page) {
-        const newCollage = articles.filter((article) => /id="collage-a-sa-maniere(?:-en)?"/.test(article));
-        assert.equal(newCollage.length, 1, 'new collage appears exactly once');
-        assert.match(html, /pastel-coton-cascade/);
-        assert.match(html, /130(?:\s|&nbsp;|&#160;)*€|€130/);
-        assert.ok(articles.some((article) => />\s*(vendu|sold)\s*</i.test(article)));
+        const paintings = articles.filter((article) => /data-kind="pastel"/.test(article));
+        assert.equal(paintings.length, 3);
+        for (const image of ['pastel-pavots-herbe', 'pastel-chardons-rouges', 'pastel-chardons']) {
+          assert.ok(paintings.some((article) => article.includes(`${image}.`)), image);
+        }
+        const titles = {
+          'collage-a-sa-maniere': 'à sa manière',
+          'collage-mesa': 'oui oui baguette',
+          'collage-clair-de-lune': 'une dernière cigarette',
+          'collage-cordee': 'haute montagne',
+          'collage-cortege': 'autoroute du soleil',
+        };
+        for (const [slug, title] of Object.entries(titles)) {
+          const matches = articles.filter((article) => article.includes(`id="${slug}${locale ? '-en' : ''}"`));
+          assert.equal(matches.length, 1, slug);
+          assert.ok(matches[0].includes(title), title);
+          if (slug === 'collage-a-sa-maniere') {
+            assert.match(matches[0], /200(?:\s|&nbsp;|&#160;)*€|€200/);
+            assert.doesNotMatch(matches[0], />\s*(vendu|sold)\s*</i);
+          } else {
+            assert.match(matches[0], />\s*(vendu|sold)\s*</i);
+          }
+        }
       }
     });
   }

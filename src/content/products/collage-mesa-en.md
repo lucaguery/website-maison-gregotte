@@ -1,5 +1,5 @@
 ---
-title: "the mesa"
+title: "oui oui baguette"
 lang: en
 description: "Paper collage, magazine cut-outs on a cream ground."
 category: collage

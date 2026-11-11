@@ -1,10 +1,9 @@
 ---
-title: "clair de lune"
+title: "une dernière cigarette"
 lang: fr
 description: "Collage papier, découpes de revues sur fond crème."
-price: 130
 category: collage
-sold: false
+sold: true
 date: 2026-11-10
 cover: ../../assets/images/collage-clair-de-lune.jpg
 tags: ["collage", "papier", "lune"]

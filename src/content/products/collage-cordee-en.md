@@ -1,5 +1,5 @@
 ---
-title: "the rope party"
+title: "haute montagne"
 lang: en
 description: "Paper collage, walkers on snow above flowering meadows."
 category: collage

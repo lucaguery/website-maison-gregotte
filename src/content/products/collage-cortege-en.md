@@ -1,5 +1,5 @@
 ---
-title: "the procession"
+title: "autoroute du soleil"
 lang: en
 description: "Paper collage, a line of cars and cut flowers under the moon."
 category: collage

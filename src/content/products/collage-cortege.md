@@ -1,5 +1,5 @@
 ---
-title: "le cortège"
+title: "autoroute du soleil"
 lang: fr
 description: "Collage papier, file de voitures et fleurs coupées sous la lune."
 category: collage

@@ -1,10 +1,9 @@
 ---
-title: "moonlight"
+title: "une dernière cigarette"
 lang: en
 description: "Paper collage, magazine cut-outs on a cream ground."
-price: 130
 category: collage
-sold: false
+sold: true
 date: 2026-11-10
 cover: ../../assets/images/collage-clair-de-lune.jpg
 tags: ["collage", "paper", "moon"]

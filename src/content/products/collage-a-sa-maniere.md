@@ -2,6 +2,7 @@
 title: "à sa manière"
 lang: fr
 description: "Collage papier, portrait en noir et blanc et lune orangée sur fond rouge."
+price: 200
 category: collage
 sold: false
 date: 2026-11-11

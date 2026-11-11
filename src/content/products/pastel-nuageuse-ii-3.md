@@ -8,7 +8,7 @@ sold: true
 date: 2026-10-01
 framed: false
 dimensions: "13 x 18 cm"
-cover: ../../assets/images/pastel-nuageuse-ii-3.webp
+cover: ../../assets/images/pastel-nuageuse-ii-3.jpg
 tags: ["pastel", "coton", "fleurs"]
 ---
 

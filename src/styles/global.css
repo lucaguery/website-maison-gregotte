@@ -292,27 +292,26 @@ body::before {
   }
 }
 
-/* ══════════════════════════════════════════════
-   ART FRAME — every work sits in the same box, resting on a shared baseline,
-   so rows align whatever the photo's proportions.
-   ══════════════════════════════════════════════ */
+/* Keep each complete work inside its slot, with a shared baseline. */
 
 .art-frame {
   position: relative;
   aspect-ratio: 4 / 5;
   min-height: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+}
+
+[data-kind='collage'] .art-frame {
+  aspect-ratio: 1;
 }
 
 .art-frame img {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  filter: drop-shadow(0 12px 16px rgba(31, 26, 20, 0.22));
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 /* accent tick — the only place terracotta appears in layout chrome */

@@ -9,6 +9,11 @@ for (const locale of ['', 'en/']) {
       const html = await readFile(`dist/${locale}${page}index.html`, 'utf8');
       const articles = html.match(/<article\b[\s\S]*?<\/article>/g) ?? [];
       assert.ok(articles.length > 0);
+      assert.match(html, /<dialog[^>]*aria-labelledby="art-viewer-title"/);
+      for (const article of articles) {
+        assert.match(article, /data-artwork/);
+        assert.match(article, /href="[^\"]+\.webp"/);
+      }
       for (const article of articles) {
         if (/>\s*(vendu|sold)\s*</i.test(article)) {
           assert.doesNotMatch(article, /€|\$|EUR|USD/, 'sold work still displays a price');

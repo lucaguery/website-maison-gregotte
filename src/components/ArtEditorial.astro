@@ -1,135 +1,28 @@
 ---
-import { Image } from 'astro:assets';
-import type { Lang } from '../i18n/translations';
-import { getLocalizedPath, t } from '../i18n/translations';
+import ArtworkCard, { type Artwork } from './ArtworkCard.astro';
+import ArtViewer from './ArtViewer.astro';
+import { curateArtworks } from '../scripts/art-order.js';
+import { getLocalizedPath, type Lang } from '../i18n/translations';
 
-type ArtKind = 'pastel' | 'watercolor' | 'collage';
-
-interface Item {
-  title: string;
-  description: string;
-  cover: ImageMetadata;
-  slug: string;
-  kind: ArtKind;
-  price?: number;
-  currency?: string;
-  sold?: boolean;
-}
-
-interface Props {
-  lang: Lang;
-  title: string;
-  subtitle?: string;
-  items: Item[];
-}
-
+interface Props { lang: Lang; title: string; subtitle?: string; items: Artwork[]; }
 const { lang, title, subtitle, items } = Astro.props;
-const shown = items.slice(0, 4);
-const moreLabel = lang === 'fr'
-  ? `voir les ${items.length} œuvres`
-  : `see all ${items.length} works`;
-
-const formatPrice = (price: number, currency: string) =>
-  new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 0,
-  }).format(price);
-
-const kindLabel = (kind: ArtKind) =>
-  t(lang, `art.kind.${kind}` as const);
+const shown = curateArtworks(items).slice(0, 4);
+const moreLabel = lang === 'fr' ? `voir les ${items.length} œuvres` : `see all ${items.length} works`;
 ---
 
-<section class="relative px-6 py-section max-w-7xl mx-auto">
-  <header class="flex flex-col items-start md:flex-row md:items-end md:justify-between mb-10 md:mb-14 gap-6">
+<section class="px-6 md:px-10 py-20 md:py-28 max-w-7xl mx-auto">
+  <header class="mb-12 md:mb-16 flex flex-wrap items-end justify-between gap-6">
     <div>
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-ink lowercase">
-        <span class="accent-tick"></span>{title}
-      </h2>
-      {subtitle && (
-        <p class="mt-3 ml-8 text-sm md:text-base text-earth/80 max-w-md leading-relaxed">
-          {subtitle}
-        </p>
-      )}
+      <h2 class="text-2xl md:text-3xl font-medium tracking-tight lowercase">{title}</h2>
+      {subtitle && <p class="mt-3 text-sm text-earth">{subtitle}</p>}
     </div>
-    <a
-      href={getLocalizedPath('/l-art', lang)}
-      class="shrink-0 text-xs uppercase tracking-[0.3em] text-earth hover:text-terracotta border-b border-earth/30 hover:border-terracotta pb-1 transition-colors duration-500"
-    >
-      {moreLabel}
-    </a>
+    <a href={getLocalizedPath('/l-art', lang)} class="text-xs text-earth border-b border-earth/40 pb-1 hover:text-ink">{moreLabel} →</a>
   </header>
-
-  <div class="editorial-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-    {shown.map((it, i) => (
-      <article class="reveal-item" data-kind={it.kind}>
-        <a href={getLocalizedPath('/l-art', lang) + '#' + it.slug} class="block">
-          <div class="art-frame">
-            <Image
-              src={it.cover}
-              alt={it.title}
-              width={900}
-            />
-          </div>
-          <div class="mt-5 grid grid-cols-[auto_1fr] items-baseline gap-x-3">
-            <span class="text-xs text-earth/55 tabular-nums">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <h3 class="text-base md:text-lg text-ink lowercase tracking-tight">
-              {it.title}
-            </h3>
-          </div>
-          <p class="mt-1.5 ml-8 text-[10px] uppercase tracking-[0.25em] text-earth/65">
-            {kindLabel(it.kind)}
-          </p>
-          <p class="mt-2 ml-8 text-sm text-earth/75 leading-relaxed line-clamp-2">
-            {it.description}
-          </p>
-          {(typeof it.price === 'number' || it.sold) && (
-            <p class="mt-3 ml-8 flex items-center gap-3 text-sm text-ink tabular-nums">
-              {!it.sold && typeof it.price === 'number' && it.currency && formatPrice(it.price, it.currency)}
-              {it.sold && (
-                <span class="text-[10px] uppercase tracking-[0.2em] text-terracotta border border-terracotta/40 px-1.5 py-0.5">
-                  {t(lang, 'shop.sold')}
-                </span>
-              )}
-            </p>
-          )}
-        </a>
-      </article>
-    ))}
+  <div class="art-gallery">
+    {shown.map((item) => <ArtworkCard lang={lang} item={item} />)}
   </div>
-
-  <div class="mt-14 md:mt-20 flex justify-center">
-    <a
-      href={getLocalizedPath('/l-art', lang)}
-      class="group inline-flex items-center gap-3 border border-ink/70 px-8 py-4 text-xs uppercase tracking-[0.3em] text-ink hover:bg-ink hover:text-cream transition-colors duration-500"
-    >
-      {moreLabel}
-      <span aria-hidden="true" class="transition-transform duration-500 group-hover:translate-x-1">→</span>
-    </a>
+  <div class="mt-16 text-center">
+    <a href={getLocalizedPath('/l-art', lang)} class="inline-block border-b border-ink/40 pb-2 text-sm hover:text-terracotta">{moreLabel} →</a>
   </div>
 </section>
-
-<script>
-  const items = document.querySelectorAll('.editorial-grid .reveal-item');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const order = Array.from(el.parentElement?.children ?? []).indexOf(el);
-            el.style.animationDelay = `${Math.max(0, order) * 100}ms`;
-            el.classList.add('revealed');
-            observer.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    items.forEach((item) => observer.observe(item));
-  } else {
-    items.forEach((item) => item.classList.add('revealed'));
-  }
-</script>
+<ArtViewer lang={lang} />

@@ -1,0 +1,47 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { t, type Lang } from '../i18n/translations';
+
+export interface Artwork {
+  title: string;
+  description: string;
+  cover: ImageMetadata;
+  slug: string;
+  kind: 'pastel' | 'watercolor' | 'collage';
+  price?: number;
+  currency?: string;
+  sold?: boolean;
+  dimensions?: string;
+  framed?: boolean;
+}
+
+interface Props { lang: Lang; item: Artwork; }
+const { lang, item } = Astro.props;
+const full = await getImage({ src: item.cover, width: Math.min(1800, item.cover.width), format: 'webp' });
+const details = [t(lang, `art.kind.${item.kind}`), item.dimensions, item.dimensions && item.framed && t(lang, 'art.framed')].filter(Boolean).join(' · ');
+const status = item.sold ? t(lang, 'shop.sold') : typeof item.price === 'number' && item.currency
+  ? new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', { style: 'currency', currency: item.currency, maximumFractionDigits: 0 }).format(item.price)
+  : '';
+---
+
+<article id={item.slug} class="art-item" data-kind={item.kind}>
+  <a
+    href={full.src}
+    class="art-frame block cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-terracotta"
+    aria-label={`${t(lang, 'art.view')} — ${item.title}`}
+    aria-haspopup="dialog"
+    data-artwork
+    data-title={item.title}
+    data-description={item.description}
+    data-details={details}
+    data-status={status}
+  >
+    <Image src={item.cover} alt={item.title} width={1200} widths={[480, 900, 1200]} sizes="(min-width: 1280px) 560px, (min-width: 768px) 44vw, 88vw" />
+    <span class="art-zoom" aria-hidden="true">↗</span>
+  </a>
+  <div class="mt-6 flex items-baseline justify-between gap-4">
+    <h3 class="text-base md:text-lg font-medium text-ink lowercase tracking-tight">{item.title}</h3>
+    {status && <p class:list={['shrink-0 text-xs tabular-nums', item.sold ? 'text-earth' : 'text-ink']}>{status}</p>}
+  </div>
+  <p class="mt-2 text-xs text-earth leading-relaxed">{details}</p>
+</article>

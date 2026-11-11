@@ -4,7 +4,7 @@ import HeroSplit from "../components/HeroSplit.astro";
 import ArtEditorial from "../components/ArtEditorial.astro";
 import { getCollection } from "astro:content";
 import { t } from "../i18n/translations";
-import heroImage from "../assets/images/collage-cortege.jpg";
+import heroImage from "../assets/images/collage-a-sa-maniere.jpg";
 
 const lang = "fr";
 
@@ -21,6 +21,8 @@ const items = products
     price: p.data.price,
     currency: p.data.currency,
     sold: p.data.sold,
+    dimensions: p.data.dimensions,
+    framed: p.data.framed,
     date: p.data.date,
   }))
   // Collages lead, then unsold before sold, newest first.

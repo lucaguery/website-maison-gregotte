@@ -26,7 +26,7 @@ const items = products
   // Collages lead, then unsold before sold, newest first.
   .sort((a, b) => Number(b.kind === 'collage') - Number(a.kind === 'collage') || Number(a.sold) - Number(b.sold) || b.date.getTime() - a.date.getTime());
 
-const tagline = 'oil pastel paintings and collages. works where colour, light and material take centre stage.';
+const tagline = 'collages. works where colour, light and material take centre stage.';
 ---
 
 <BaseLayout>

@@ -16,12 +16,9 @@ for (const locale of ['', 'en/']) {
       }
       assert.doesNotMatch(html, /pastel-nuageuse-ii-|pastel-collection-bleue/);
       assert.doesNotMatch(html, /pastel-coton-cascade|pastel-tulipes|pastel-pavots\.|pastel-bouquet/);
+      assert.doesNotMatch(html, /data-kind="pastel"|id="art-pastel"/);
       if (page) {
-        const paintings = articles.filter((article) => /data-kind="pastel"/.test(article));
-        assert.equal(paintings.length, 3);
-        for (const image of ['pastel-pavots-herbe', 'pastel-chardons-rouges', 'pastel-chardons']) {
-          assert.ok(paintings.some((article) => article.includes(`${image}.`)), image);
-        }
+        assert.equal(articles.length, 5);
         const titles = {
           'collage-a-sa-maniere': 'à sa manière',
           'collage-mesa': 'oui oui baguette',

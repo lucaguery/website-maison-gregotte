@@ -1,5 +1,5 @@
 ---
-title: "haute montagne"
+title: "la cordée"
 lang: fr
 description: "Collage papier, marcheurs sur la neige et prairies fleuries."
 category: collage

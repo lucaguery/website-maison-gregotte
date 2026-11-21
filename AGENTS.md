@@ -89,12 +89,13 @@ Always create both FR and EN versions of content entries.
 
 ## Working with Laura (non-developer)
 
-Requests usually come from laura, the artist. She is not a developer and reviews changes only through the Vercel preview URL.
+Requests usually come from laura, the artist. Use plain language and share the Vercel preview URL when Laura asks to review a change.
 
 ### Rules
 
 - **One request = one small PR.** Do not bundle unrelated changes or "improve" things she did not ask for.
 - **Run `npm run build` before opening the PR.** If it fails, fix it; never open a PR with a failing build.
+- **Merge after checks pass.** Open a PR and wait for the checks to pass and the Vercel preview to be ready. Then merge the PR on Laura’s behalf without waiting for manual confirmation. If Laura asks to review before publication, leave the PR open for her review. Follow any review requirements enforced by GitHub.
 - **Content changes always come in pairs**: FR entry + EN entry. Translate the text yourself if she only gives one language, and say so in the PR.
 - **Do not touch** unless explicitly asked: `package.json`, `package-lock.json`, `astro.config.mjs`, `src/content.config.ts`, `src/styles/global.css` (`@theme`), `src/layouts/`, `.gitignore`, `AGENTS.md`, `CLAUDE.md`. Never add dependencies.
 - **Images she uploads** land in `src/assets/images/` (via GitHub web upload). Rename them to kebab-case (`collage-titre.jpg`, no spaces) and update the references. If an image she mentions is missing, ask instead of guessing.

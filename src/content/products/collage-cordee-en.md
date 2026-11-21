@@ -1,5 +1,5 @@
 ---
-title: "haute montagne"
+title: "la cordée"
 lang: en
 description: "Paper collage, walkers on snow above flowering meadows."
 category: collage

@@ -23,7 +23,7 @@ for (const locale of ['', 'en/']) {
           'collage-a-sa-maniere': 'à sa manière',
           'collage-mesa': 'oui oui baguette',
           'collage-clair-de-lune': 'une dernière cigarette',
-          'collage-cordee': 'haute montagne',
+          'collage-cordee': 'la cordée',
           'collage-cortege': 'autoroute du soleil',
         };
         for (const [slug, title] of Object.entries(titles)) {

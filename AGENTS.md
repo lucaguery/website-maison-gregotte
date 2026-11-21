@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Codex, Claude Code) working in this repository.
 
 ## Project Overview
 
@@ -65,7 +65,7 @@ title: "Mon objet"
 lang: fr
 description: "Description courte."
 price: 150
-category: vintage   # or "painting"
+category: collage   # "pastel" | "watercolor" | "collage"
 sold: false
 date: 2024-11-01
 cover: ../../assets/images/my-item.jpg
@@ -86,3 +86,22 @@ Always create both FR and EN versions of content entries.
 - Reference from content frontmatter as relative paths: `../../assets/images/filename.jpg`
 - Use `<Image>` component from `astro:assets` in Astro components for automatic optimization
 - Place static assets (favicon, etc.) in `public/`
+
+## Working with Laura (non-developer)
+
+Requests usually come from laura, the artist. She is not a developer and reviews changes only through the Vercel preview URL.
+
+### Rules
+
+- **One request = one small PR.** Do not bundle unrelated changes or "improve" things she did not ask for.
+- **Run `npm run build` before opening the PR.** If it fails, fix it; never open a PR with a failing build.
+- **Content changes always come in pairs**: FR entry + EN entry. Translate the text yourself if she only gives one language, and say so in the PR.
+- **Do not touch** unless explicitly asked: `package.json`, `package-lock.json`, `astro.config.mjs`, `src/content.config.ts`, `src/styles/global.css` (`@theme`), `src/layouts/`, `.gitignore`, `AGENTS.md`, `CLAUDE.md`. Never add dependencies.
+- **Images she uploads** land in `src/assets/images/` (via GitHub web upload). Rename them to kebab-case (`collage-titre.jpg`, no spaces) and update the references. If an image she mentions is missing, ask instead of guessing.
+- **Write the PR description in French, plain language**: what changed, and which page(s) to open on the preview to check it (e.g. `/l-art` and `/en/l-art`).
+
+### Where things live
+
+- Artwork for sale: `src/content/products/<slug>.md` (FR) and `<slug>-en.md` (EN). Mark as sold with `sold: true`.
+- UI labels (menu, buttons, footer): `src/i18n/translations.ts`.
+- Page text: `src/pages/*.astro` (FR) and `src/pages/en/*.astro` (EN).

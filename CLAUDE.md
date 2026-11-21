@@ -65,7 +65,7 @@ title: "Mon objet"
 lang: fr
 description: "Description courte."
 price: 150
-category: vintage   # or "painting"
+category: collage   # "pastel" | "watercolor" | "collage"
 sold: false
 date: 2024-11-01
 cover: ../../assets/images/my-item.jpg
